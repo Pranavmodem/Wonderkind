@@ -43,10 +43,18 @@ def main():
     for i in range(num_questions):
         op_choice = random.choice(op_choices)
         op_name, op_func, op_disp = op_map[op_choice]
-        a = random.randint(1, 100)
-        b = random.randint(1, 100)
-        if op_choice == '/' and b == 0:
-            b = 1
+        # Generate a, b so that answer < 100
+        while True:
+            a = random.randint(1, 100)
+            b = random.randint(1, 100)
+            if op_choice == '/' and b == 0:
+                b = 1
+            try:
+                answer = op_func(a, b)
+                if abs(answer) < 100:
+                    break
+            except Exception:
+                continue
         question = f"Q{i+1}: {a} {op_disp} {b} = ?"
         print(question)
         start = time.time()
@@ -56,14 +64,13 @@ def main():
         print(f"Time taken: {elapsed:.2f} seconds\n")
         try:
             user_answer = float(user_input)
-            answer = op_func(a, b)
             if abs(user_answer - answer) < 1e-6:
                 print("Correct!\n")
                 correct += 1
             else:
                 print(f"Incorrect. The correct answer is {answer}\n")
         except Exception:
-            print(f"Invalid input. The correct answer is {op_func(a, b)}\n")
+            print(f"Invalid input. The correct answer is {answer}\n")
         total += 1
         times.append(elapsed)
     total_time = sum(times)
