@@ -75,7 +75,7 @@
   list-style: none;
 }
 
-.dot {
+.onboard-dot {
   display: block;
   width: 10px;
   height: 10px;
@@ -86,11 +86,11 @@
   transition: width 0.25s;
 }
 
-.dot.done {
+.onboard-dot.done {
   background: var(--ob-soft);
 }
 
-.dot.on {
+.onboard-dot.on {
   width: 26px;
   background: var(--ob-accent);
 }
