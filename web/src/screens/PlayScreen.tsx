@@ -3,7 +3,8 @@ import { Can, type Mood } from "../components/Can";
 import { withBuddyName } from "../game/buddy";
 import { QuestionStage, same, type Status } from "../components/QuestionStage";
 import { CloseButton, SoundToggle, StarIcon, worldStyle } from "../components/bits";
-import { findLevel } from "../game/curriculum";
+import { findLevel, subjectOf } from "../game/curriculum";
+import { PRAISE } from "../game/praise";
 import { LESSON_SIZE, starsFor, type Save } from "../game/progress";
 import { adapt, answerText, bag, buildLesson, rand, withUnit, type Question } from "../game/questions";
 import { say, sfx } from "../game/sound";
@@ -26,7 +27,8 @@ interface Props {
   onSeen: (levelId: string, keys: string[]) => void;
 }
 
-const nextPraise = bag(["You got it!", "Yes! That's right.", "Super!", "Brilliant!", "Nailed it!", "Wow, nice work!", "Spot on!", "Math star!", "That's it!", "Awesome!"]);
+/** One bag per subject, so a physics or chemistry lesson never hears "Math star!". */
+const nextPraise = { math: bag(PRAISE.math), physics: bag(PRAISE.physics), chemistry: bag(PRAISE.chemistry) };
 const nextSecondTry = bag(["You figured it out!", "Yes! You kept trying.", "There you go!", "Second time's the charm!"]);
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -126,7 +128,7 @@ export function PlayScreen({ levelId, save, onToggleSound, onExit, onFinish, onS
   function answer(value: number, from: Element | null, correct?: boolean) {
     if (done) return;
     if (correct ?? same(value, q.answer)) {
-      const line = tries === 0 ? nextPraise() : nextSecondTry();
+      const line = tries === 0 ? nextPraise[subjectOf(world)]() : nextSecondTry();
       sfx.correct();
       setStatus("correct");
       const run = tries === 0 ? streak + 1 : 0;
