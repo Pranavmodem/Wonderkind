@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Wonderkind: a glowing ringed planet in a night sky, like the props along the map. -->
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#3b2580"/>
+      <stop offset="0.55" stop-color="#1a1238"/>
+      <stop offset="1" stop-color="#0d0920"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#9d6bff" stop-opacity="0.75"/>
+      <stop offset="0.6" stop-color="#c45ee0" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#c45ee0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="36%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#f3ecff"/>
+      <stop offset="0.3" stop-color="#b79cff"/>
+      <stop offset="0.68" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#b03fc8"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <circle cx="96" cy="110" r="3" fill="#fff" opacity="0.8"/>
+  <circle cx="410" cy="86" r="2.5" fill="#fff" opacity="0.7"/>
+  <circle cx="440" cy="300" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="70" cy="380" r="2.5" fill="#fff" opacity="0.6"/>
+  <circle cx="300" cy="450" r="2" fill="#fff" opacity="0.5"/>
+  <circle cx="256" cy="268" r="210" fill="url(#glow)"/>
+  <!-- back half of the ring -->
+  <path d="M86 300 C70 250 442 186 426 236" stroke="#e7dcff" stroke-opacity="0.45" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <circle cx="256" cy="268" r="120" fill="url(#planet)"/>
+  <path d="M152 236 C200 222 312 222 364 244 M146 286 C210 270 316 276 366 292" stroke="#fff" stroke-opacity="0.18" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <ellipse cx="210" cy="210" rx="34" ry="20" transform="rotate(-30 210 210)" fill="#fff" opacity="0.55"/>
+  <!-- front half of the ring -->
+  <path d="M86 300 C102 350 442 286 426 236" stroke="#f7f2ff" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <!-- a little star -->
+  <path d="M392 128 C395 146 398 149 416 152 C398 155 395 158 392 176 C389 158 386 155 368 152 C386 149 389 146 392 128 Z" fill="#fff"/>
+</svg>

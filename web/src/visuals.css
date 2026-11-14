@@ -1,0 +1,1923 @@
+/* Picture models for the older worlds, plus equation extras. */
+
+.visual svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------------ number line */
+
+.nl {
+  width: min(100%, 620px);
+}
+
+.nl-axis,
+.nl-tick {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.nl-tick {
+  stroke-width: 2.4;
+}
+
+.nl-label {
+  fill: var(--ink);
+  font: 800 19px var(--font-play);
+  text-anchor: middle;
+}
+
+.nl-from {
+  fill: var(--w);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.nl-to {
+  fill: var(--leaf);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.nl-jump {
+  fill: none;
+  stroke: var(--w-deep);
+  stroke-width: 3.5;
+  stroke-dasharray: 8 7;
+}
+
+.nl-arrowhead {
+  fill: var(--w-deep);
+}
+
+.nl-pill rect {
+  fill: var(--w);
+}
+
+.nl-pill text {
+  fill: var(--w-on);
+  font: 900 17px var(--font-play);
+  text-anchor: middle;
+}
+
+.nl-pill-to rect {
+  fill: var(--leaf);
+}
+
+.nl-pill-to text {
+  fill: #fff;
+}
+
+/* ---------------------------------------------------------------- places */
+
+.places {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.place {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: clamp(40px, 12vw, 62px);
+}
+
+.place.gap {
+  margin-left: 10px;
+}
+
+.place-digit {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(54px, 15vw, 74px);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 5px 0 var(--line);
+  font: 900 clamp(1.9rem, 8vw, 2.6rem) / 1 var(--font-play);
+}
+
+.place.on .place-digit {
+  background: var(--w);
+  color: var(--w-on);
+  box-shadow: 0 5px 0 var(--w-deep);
+}
+
+.place-name {
+  min-height: 2.2em;
+  font-size: 0.72rem;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.place.on .place-name {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.place-point {
+  width: 18px;
+}
+
+.place-point .place-digit {
+  align-items: end;
+  background: none;
+  box-shadow: none;
+  padding-bottom: 6px;
+}
+
+.place-comma {
+  width: 6px;
+}
+
+/* ------------------------------------------------------------- area model */
+
+.area-model {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 10px;
+  width: min(100%, 460px);
+}
+
+.area-top {
+  display: flex;
+}
+
+.area-top span {
+  flex-basis: 0;
+  text-align: center;
+  font: 900 1.4rem var(--font-play);
+}
+
+.area-side {
+  align-self: center;
+  font: 900 1.4rem var(--font-play);
+}
+
+.area-boxes {
+  display: flex;
+  height: 130px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.area-box {
+  flex-basis: 0;
+  display: grid;
+  place-items: center;
+  font: 800 1.3rem var(--font-play);
+}
+
+.area-tens {
+  background: var(--w);
+  color: var(--w-on);
+  border-right: 3px solid var(--ink);
+}
+
+.area-ones {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+.revealing .area-box {
+  animation: pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+/* -------------------------------------------------------------- fractions */
+
+.fraction-set {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px 24px;
+  width: 100%;
+}
+
+.fraction-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fraction-row {
+  width: min(100%, 460px);
+}
+
+.fbar {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  height: 58px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 4px 0 var(--line);
+}
+
+.fpart {
+  flex: 1;
+  border-radius: 8px;
+  background: #edf2f8;
+}
+
+.fpart-a {
+  background: var(--w);
+  box-shadow:
+    inset 0 -5px 0 var(--w-deep),
+    inset 0 4px 0 rgb(255 255 255 / 0.25);
+}
+
+.fpart-b {
+  background: var(--sun);
+  box-shadow: inset 0 -5px 0 var(--sun-deep);
+}
+
+.fpart-target {
+  background: transparent;
+  border: 3px dashed var(--w-deep);
+}
+
+.fpart-target.filled {
+  border: 0;
+  background: var(--sun);
+  box-shadow: inset 0 -5px 0 var(--sun-deep);
+  animation: pop 0.3s calc(var(--i) * 60ms) cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.pie {
+  width: clamp(130px, 38vw, 180px);
+}
+
+.slice {
+  stroke: #fff;
+  stroke-width: 0.04;
+  fill: #edf2f8;
+}
+
+.slice-a {
+  fill: var(--w);
+}
+
+.slice-b {
+  fill: var(--sun);
+}
+
+.slice-target {
+  fill: #fff;
+  stroke: var(--w-deep);
+  stroke-dasharray: 0.08 0.06;
+}
+
+.slice-target.filled {
+  fill: var(--sun);
+  stroke: #fff;
+  stroke-dasharray: none;
+}
+
+.fraction-label {
+  font: 900 1.4rem var(--font-play);
+}
+
+/* ------------------------------------------------------- hundred charts */
+
+.hundred {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 3px;
+  width: min(100%, 440px);
+}
+
+.hc {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: var(--card);
+  font: 700 clamp(0.72rem, 3vw, 0.95rem) var(--font-play);
+  color: var(--ink-soft);
+}
+
+.hc.on {
+  background: var(--w);
+  color: var(--w-on);
+}
+
+.hc.ask {
+  outline: 3px dashed var(--w-deep);
+  outline-offset: -3px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.hc.ask.solved {
+  outline: 0;
+  background: var(--leaf);
+  color: #fff;
+  animation: pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.hgrid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  width: min(100%, 280px);
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--tin-deep);
+}
+
+.hgrid span {
+  aspect-ratio: 1;
+  background: var(--card);
+}
+
+.hgrid span.on {
+  background: var(--w);
+}
+
+/* ------------------------------------------------------------ number bond */
+
+.bond {
+  position: relative;
+  width: 230px;
+  height: 190px;
+}
+
+.bond-lines {
+  position: absolute;
+  inset: 20px 15px 0;
+  width: calc(100% - 30px);
+  height: 150px;
+}
+
+.bond-lines path {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.bond-node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow:
+    inset 0 0 0 4px var(--w),
+    0 4px 0 var(--line);
+  font: 900 2rem var(--font-play);
+}
+
+.bond-whole {
+  top: 0;
+  left: calc(50% - 37px);
+  background: var(--w);
+  color: var(--w-on);
+  box-shadow: 0 5px 0 var(--w-deep);
+}
+
+.bond-left {
+  bottom: 0;
+  left: 6px;
+}
+
+.bond-right {
+  bottom: 0;
+  right: 6px;
+}
+
+.bond-node.ask {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: none;
+  outline: 4px dashed var(--w-deep);
+  outline-offset: -4px;
+}
+
+.bond-node.solved {
+  background: var(--leaf);
+  color: #fff;
+  box-shadow: 0 5px 0 var(--leaf-deep);
+  animation: pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* ---------------------------------------------------------- tables, tape */
+
+.vtable {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: 0 4px 0 var(--line);
+  font: 800 1.3rem var(--font-play);
+}
+
+.vtable th {
+  padding: 10px 18px;
+  background: var(--w);
+  color: var(--w-on);
+  font-size: 1.05rem;
+}
+
+.vtable td {
+  padding: 10px 18px;
+  border-top: 2px solid #edf2f8;
+  text-align: center;
+}
+
+.vtable td + td,
+.vtable th + th {
+  border-left: 2px solid #edf2f8;
+}
+
+/* A very wide table scrolls sideways rather than spilling off a phone screen. */
+.visual-table {
+  justify-content: safe center;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+@media (max-width: 480px) {
+  .vtable {
+    font-size: 1.1rem;
+  }
+
+  .vtable th,
+  .vtable td {
+    padding: 8px 10px;
+  }
+}
+
+.vtable td.ask {
+  color: var(--w-deep);
+  background: var(--w-soft);
+}
+
+.vtable td.solved {
+  background: var(--good-soft);
+  color: var(--leaf-deep);
+}
+
+.tape {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 480px);
+}
+
+.tape-row {
+  display: grid;
+  grid-template-columns: 5.5em minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.tape-label {
+  font-weight: 700;
+  text-align: right;
+}
+
+.tape-bar {
+  display: grid;
+  grid-template-columns: repeat(var(--most), 1fr);
+  gap: 3px;
+}
+
+.tape-part {
+  display: grid;
+  place-items: center;
+  height: 44px;
+  border-radius: 8px;
+  color: var(--ink);
+  font: 900 1.2rem var(--font-play);
+}
+
+/* --------------------------------------------------------- pattern, bag */
+
+.pattern {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pattern-item {
+  display: grid;
+  place-items: center;
+  width: clamp(48px, 13vw, 64px);
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: 0 4px 0 var(--line);
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+}
+
+.pattern-item.ask {
+  background: transparent;
+  box-shadow: none;
+  outline: 4px dashed var(--w-deep);
+  outline-offset: -4px;
+  font: 900 2rem var(--font-play);
+}
+
+.pattern-item.solved {
+  background: var(--good-soft);
+  animation: pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.hinting .pattern-item {
+  animation: hint-pulse 0.6s calc(var(--i) * 0.45s) both;
+}
+
+.marbles-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.bag {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  width: 210px;
+  min-height: 150px;
+  padding: 26px 18px 18px;
+  border-radius: 40px 40px 70px 70px;
+  background: #f3e5da;
+  box-shadow:
+    inset 0 -8px 0 #e2cdbd,
+    0 5px 0 #d9c1ae;
+}
+
+.marble {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.marble-key {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.marble-key span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.marble-key i {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+/* ---------------------------------------------------- shapes, geometry */
+
+.shape-svg {
+  width: clamp(120px, 34vw, 170px);
+  height: auto;
+}
+
+.shape-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.shape-row .shape-svg {
+  width: clamp(56px, 16vw, 80px);
+}
+
+.rect-svg {
+  width: min(100%, 440px);
+}
+
+.circle-svg {
+  width: min(100%, 260px);
+}
+
+.rect-body {
+  fill: color-mix(in srgb, var(--w) 22%, #fff);
+}
+
+.rect-edge,
+.rect-edge-fill {
+  fill: color-mix(in srgb, var(--w) 22%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.rect-edge {
+  fill: none;
+}
+
+.rect-grid {
+  stroke: color-mix(in srgb, var(--w) 55%, #fff);
+  stroke-width: 1.5;
+}
+
+.side-label,
+.angle-label {
+  fill: var(--ink);
+  font: 900 21px var(--font-play);
+  text-anchor: middle;
+}
+
+.side-label.end {
+  text-anchor: end;
+}
+
+.side-label.start {
+  text-anchor: start;
+}
+
+.side-label.ask,
+.angle-label.ask {
+  fill: var(--w-deep);
+}
+
+.rect-inside {
+  fill: var(--ink);
+  font: 800 20px var(--font-read);
+  text-anchor: middle;
+}
+
+.height-line {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-dasharray: 7 6;
+}
+
+.right-mark {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.box-front {
+  fill: var(--w);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.box-top {
+  fill: color-mix(in srgb, var(--w) 55%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.box-side {
+  fill: var(--w-deep);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.box-grid line {
+  stroke: rgb(255 255 255 / 0.55);
+  stroke-width: 1.5;
+}
+
+.center-dot {
+  fill: var(--ink);
+}
+
+.radius-line {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ray {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ray-strong {
+  stroke-width: 5;
+}
+
+.ray-b {
+  stroke: var(--w-deep);
+}
+
+.angle-arc {
+  fill: none;
+  stroke-width: 4;
+}
+
+.arc-0 {
+  stroke: var(--w);
+}
+
+.arc-1 {
+  stroke: var(--sun-deep);
+}
+
+.arc-2 {
+  stroke: var(--leaf);
+}
+
+.arc-3 {
+  stroke: var(--grape);
+}
+
+.protractor-body {
+  fill: rgb(255 255 255 / 0.85);
+  stroke: var(--tin-deep);
+  stroke-width: 2;
+}
+
+.protractor-tick {
+  stroke: var(--ink-soft);
+  stroke-width: 1.6;
+}
+
+.protractor-num {
+  fill: var(--ink-soft);
+  font: 700 12px var(--font-play);
+  text-anchor: middle;
+}
+
+.grid-svg {
+  width: min(100%, 380px);
+}
+
+.grid-bg {
+  fill: #fff;
+}
+
+.gridline {
+  stroke: #c3d1e3;
+  stroke-width: 1.5;
+}
+
+.axis {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.grid-num {
+  fill: var(--ink-soft);
+  font: 700 13px var(--font-play);
+  text-anchor: middle;
+}
+
+.grid-num.end {
+  text-anchor: end;
+}
+
+.grid-point {
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.grid-point-label {
+  fill: var(--ink);
+  font: 900 18px var(--font-play);
+}
+
+/* ------------------------------------------------------------ measuring */
+
+.clock {
+  width: clamp(170px, 50vw, 230px);
+}
+
+.clock-rim {
+  fill: var(--w);
+}
+
+.clock-face {
+  fill: #fff;
+}
+
+.clock-tick {
+  stroke: var(--ink-soft);
+  stroke-width: 1.4;
+}
+
+.clock-tick.big {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.clock-num {
+  fill: var(--ink);
+  font: 900 17px var(--font-play);
+  text-anchor: middle;
+}
+
+.clock-hour {
+  stroke: var(--ink);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.clock-minute {
+  stroke: var(--w-deep);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+}
+
+.clock-pin {
+  fill: var(--ink);
+}
+
+.coins {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 460px;
+}
+
+.coin {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font: 900 1rem var(--font-play);
+  color: #3f4652;
+  background: radial-gradient(circle at 35% 30%, #f4f6f9, #c4ccd8 60%, #a3adbd);
+  box-shadow:
+    inset 0 0 0 3px rgb(0 0 0 / 0.08),
+    0 3px 0 #8d97a8;
+}
+
+.coin.penny {
+  width: 50px;
+  height: 50px;
+  color: #5a2f14;
+  background: radial-gradient(circle at 35% 30%, #f1b88f, #c9794a 60%, #a25b31);
+  box-shadow:
+    inset 0 0 0 3px rgb(0 0 0 / 0.08),
+    0 3px 0 #864722;
+}
+
+.coin.nickel {
+  width: 56px;
+  height: 56px;
+}
+
+.coin.dime {
+  width: 46px;
+  height: 46px;
+  font-size: 0.85rem;
+}
+
+.coin.quarter {
+  width: 64px;
+  height: 64px;
+}
+
+.bill {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 52px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #cfe8c4, #9fcb8c);
+  box-shadow:
+    inset 0 0 0 4px #e8f4e1,
+    inset 0 0 0 6px #7fae6c,
+    0 3px 0 #6f9a5d;
+  color: #2c4d22;
+  font: 900 1.4rem var(--font-play);
+}
+
+.ruler {
+  width: min(100%, 600px);
+}
+
+.ruler-thing rect {
+  fill: var(--w);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.ruler-tip {
+  fill: #f3d2a8;
+  stroke: var(--w-deep);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.ruler-guide {
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+
+.ruler-tag {
+  font-size: 22px;
+}
+
+.ruler-body {
+  fill: #ffe7a8;
+  stroke: #d8b25a;
+  stroke-width: 2;
+}
+
+.ruler-tick {
+  stroke: #6b5520;
+  stroke-width: 2;
+}
+
+.ruler-num {
+  fill: #5b4718;
+  font: 800 16px var(--font-play);
+  text-anchor: middle;
+}
+
+.ruler-unit {
+  fill: #5b4718;
+  font: 700 13px var(--font-read);
+  text-anchor: end;
+}
+
+.lengths {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 460px);
+}
+
+.length-row {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.length-name {
+  font-weight: 700;
+  text-align: right;
+}
+
+.length-bar {
+  display: block;
+  height: 30px;
+  border-radius: 999px;
+}
+
+.graph {
+  margin: 0;
+  width: min(100%, 460px);
+}
+
+.graph figcaption {
+  margin-bottom: 6px;
+  font: 800 1.1rem var(--font-play);
+  text-align: center;
+}
+
+.graph svg {
+  width: 100%;
+}
+
+.bar {
+  stroke-width: 2.5;
+}
+
+.bar-label {
+  fill: var(--ink);
+  font: 700 14px var(--font-read);
+  text-anchor: middle;
+}
+
+.dot-mark {
+  fill: var(--w);
+  stroke: var(--w-deep);
+  stroke-width: 2;
+}
+
+.picto-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.picto-row {
+  display: grid;
+  grid-template-columns: 5.5em 1fr;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px dashed #e3eaf3;
+  padding-bottom: 4px;
+}
+
+.picto-label {
+  font-weight: 700;
+}
+
+.picto-icons {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  overflow-wrap: anywhere;
+}
+
+.picto-icons .half {
+  display: inline-block;
+  width: 0.55em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.picto-key {
+  margin: 8px 0 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ------------------------------------------------------ rows (how many more) */
+
+.row-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row-pair .things {
+  justify-content: start;
+}
+
+.row-pair,
+.line-fit {
+  container-type: inline-size;
+  width: 100%;
+}
+
+.row-pair .things,
+.line-fit .things {
+  gap: 6px min(10px, 2cqw);
+}
+
+/* Long rows and lines (up to 20) shrink so they fit on one line, keeping the one-to-one match visible. */
+.row-pair .thing .emoji,
+.line-fit .thing .emoji {
+  font-size: min(clamp(2.3rem, 9.5vw, 3.1rem), calc((100cqw - var(--cols) * 10px) / var(--cols) * 0.9));
+}
+
+.thing.extra .emoji {
+  filter: drop-shadow(0 0 0 transparent);
+}
+
+.revealing .thing.extra {
+  border-radius: 12px;
+  background: var(--card);
+}
+
+/* ------------------------------------------------------- base-ten flats */
+
+.flats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.flat {
+  display: grid;
+  place-items: stretch;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 1px;
+  width: clamp(62px, 20vw, 104px);
+  padding: 2px;
+  border: 2px solid var(--w-deep);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--w-deep) 40%, #fff);
+}
+
+.flat i {
+  aspect-ratio: 1;
+  background: var(--w);
+}
+
+.flat .badge {
+  top: -30px;
+  right: 50%;
+  translate: 50% 0;
+}
+
+/* ------------------------------------------------------------- equation */
+
+.blank-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.unit {
+  font-size: 0.55em;
+  color: var(--ink-soft);
+}
+
+.paren {
+  margin: 0 -0.18em;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.pct {
+  margin-left: -0.25em;
+}
+
+.word {
+  font: 700 0.5em var(--font-read);
+  color: var(--ink-soft);
+}
+
+.var {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.num sup {
+  font-size: 0.55em;
+}
+
+.frac {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12em;
+  vertical-align: middle;
+}
+
+.frac-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.62em;
+  line-height: 1.05;
+}
+
+.frac-n {
+  padding: 0 0.15em 0.06em;
+  border-bottom: 0.08em solid currentColor;
+}
+
+.frac-d {
+  padding: 0.06em 0.15em 0;
+}
+
+.blank-small {
+  min-width: 1.4em;
+  height: 1.25em;
+  border-width: 3px;
+  border-radius: 10px;
+  font-size: 0.95em;
+}
+
+.choice .frac-stack {
+  font-size: 0.7em;
+}
+
+/* --------------------------------------------------------- keypad extras */
+
+.keypad-extra .key-check {
+  grid-column: 1 / -1;
+  height: 58px;
+}
+
+.key-dot,
+.key-minus {
+  color: var(--w-deep);
+}
+
+/* Running totals over 100 are wide, so alternate tens badges up and down. */
+.rods .rod:nth-child(even) .badge {
+  top: -56px;
+}
+
+/* ---------------------------------------- layouts, scenes, pairs, flashes */
+
+.spread {
+  position: relative;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+}
+
+.spread-scatter {
+  aspect-ratio: 4 / 3;
+}
+
+.spread-spot {
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.spread .emoji {
+  font-size: clamp(2rem, 8vw, 2.6rem);
+}
+
+.flash-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px;
+  font: 800 1.2rem var(--font-play);
+}
+
+.flash-cover span {
+  font-size: 3rem;
+}
+
+.shape-turn {
+  display: inline-block;
+}
+
+.scene {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  background: linear-gradient(#fff 60%, color-mix(in srgb, var(--w-soft) 60%, #fff) 60%);
+}
+
+.scene-item {
+  position: absolute;
+  z-index: 2;
+  translate: -50% -50%;
+  line-height: 1;
+}
+
+.scene-item.behind {
+  z-index: 1;
+  scale: 0.85;
+  filter: saturate(0.8) brightness(0.95);
+}
+
+.pair {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 28px;
+  padding-bottom: 6px;
+  border-bottom: 4px solid var(--ink-soft);
+}
+
+.pair-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.pair-item span {
+  line-height: 1;
+}
+
+.pair-item figcaption {
+  margin-top: 6px;
+  font: 800 1rem var(--font-play);
+}
+
+/* ------------------------------------------------- graphs and trig (older) */
+
+.plot {
+  width: min(100%, 460px);
+}
+
+.plot-curve {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.plot-curve.dashed,
+.plot-line.dashed {
+  stroke-dasharray: 8 6;
+}
+
+.plot-line {
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.plot-shade {
+  fill: color-mix(in srgb, var(--w) 30%, transparent);
+}
+
+.plot-rect {
+  fill: color-mix(in srgb, var(--sun) 55%, transparent);
+  stroke: var(--sun-deep);
+  stroke-width: 1.5;
+}
+
+.plot-point {
+  fill: var(--w);
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+.plot-point.open {
+  fill: #fff;
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.plot-label {
+  font: 800 14px var(--font-play);
+  text-anchor: end;
+}
+
+.grid-point-label.small,
+.angle-label.small {
+  font-size: 15px;
+}
+
+.uc-circle {
+  fill: color-mix(in srgb, var(--w) 12%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.uc-cos {
+  stroke: var(--berry);
+  stroke-width: 4;
+}
+
+.uc-sin {
+  stroke: var(--leaf);
+  stroke-width: 4;
+}
+
+.uc-label {
+  font: 800 14px var(--font-play);
+  text-anchor: middle;
+}
+
+.uc-label.cos {
+  fill: var(--berry-deep);
+}
+
+.uc-label.sin {
+  fill: var(--leaf-deep);
+  text-anchor: start;
+}
+
+.uc-label.sin.end {
+  text-anchor: end;
+}
+
+.venn-box {
+  fill: #fff;
+  stroke: var(--line);
+  stroke-width: 2;
+}
+
+.venn-a {
+  fill: color-mix(in srgb, var(--w) 28%, transparent);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.venn-b {
+  fill: color-mix(in srgb, var(--sun) 35%, transparent);
+  stroke: var(--sun-deep);
+  stroke-width: 3;
+}
+
+.venn-label {
+  fill: var(--ink);
+  font: 800 16px var(--font-play);
+  text-anchor: middle;
+}
+
+.venn-num {
+  fill: var(--ink);
+  font: 900 24px var(--font-play);
+  text-anchor: middle;
+}
+
+.venn-num.ask {
+  fill: var(--w-deep);
+}
+
+.venn-num.solved {
+  fill: var(--leaf-deep);
+}
+
+.box-body {
+  fill: color-mix(in srgb, var(--w) 30%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.box-median {
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+.box-whisker {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.plot-label,
+.grid-point-label,
+.uc-label {
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.length-bar[data-units] {
+  background-image: repeating-linear-gradient(to right, transparent 0 calc(var(--u) - 2px), rgb(255 255 255 / 0.75) calc(var(--u) - 2px) var(--u));
+}
+
+.op-vs {
+  font-size: 1.4rem;
+  text-transform: none;
+}
+
+/* ------------------------------------------- 2×2 area, rect rows, measuring */
+
+.area-2x2 .area-sides {
+  display: flex;
+  flex-direction: column;
+}
+
+.area-2x2 .area-sides span {
+  flex-basis: 0;
+  display: grid;
+  place-items: center;
+  font: 900 1.3rem var(--font-play);
+}
+
+.area-grid {
+  display: flex;
+  flex-direction: column;
+  height: 170px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.area-grid-row {
+  flex-basis: 0;
+  display: flex;
+}
+
+.area-grid-row + .area-grid-row {
+  border-top: 3px solid var(--ink);
+}
+
+.area-grid .area-box + .area-box {
+  border-left: 3px solid var(--ink);
+}
+
+.area-00 {
+  background: var(--w);
+  color: var(--w-on);
+}
+
+.area-01 {
+  background: var(--sun);
+}
+
+.area-10 {
+  background: color-mix(in srgb, var(--w) 55%, #fff);
+}
+
+.area-11 {
+  background: var(--sun-soft);
+}
+
+.rects-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.rects-item {
+  margin: 0;
+  text-align: center;
+}
+
+.rects-item svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.rects-item figcaption {
+  font: 800 1.05rem var(--font-play);
+}
+
+.side-label.small {
+  font-size: 16px;
+}
+
+.geo-dot {
+  fill: var(--w-deep);
+}
+
+.geo-arrowhead {
+  fill: var(--ink);
+}
+
+.jug {
+  width: min(100%, 260px);
+}
+
+.jug-glass {
+  fill: rgb(255 255 255 / 0.35);
+  stroke: var(--ink-soft);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.jug-handle {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.jug-water {
+  fill: color-mix(in srgb, var(--wave) 55%, #fff);
+}
+
+.jug-mark {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.jug-num {
+  fill: var(--ink);
+  font: 800 13px var(--font-play);
+}
+
+.scale-body {
+  fill: var(--w);
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.scale-pan {
+  fill: var(--tin);
+  stroke: var(--tin-deep);
+  stroke-width: 2;
+}
+
+.scale-emoji {
+  font-size: 38px;
+  text-anchor: middle;
+}
+
+.scale-dial {
+  fill: #fff;
+  stroke: var(--w-deep);
+  stroke-width: 3;
+}
+
+.scale-num {
+  fill: var(--ink);
+  font: 800 12px var(--font-play);
+  text-anchor: middle;
+}
+
+.scale-needle {
+  stroke: var(--berry);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.scale-unit {
+  fill: var(--w-on);
+  font: 900 18px var(--font-play);
+  text-anchor: middle;
+}
+
+.leftover {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 3px dashed var(--w-deep);
+  border-radius: 18px;
+  font-size: 1.8rem;
+}
+
+.leftover-label {
+  font: 800 1rem var(--font-play);
+}
+
+/* ---------------------------------- spinner, tree, net, slice, rays, pairs */
+
+.spinner {
+  width: clamp(170px, 50vw, 230px);
+}
+
+.spinner-part {
+  stroke: #fff;
+  stroke-width: 0.03;
+}
+
+.spinner-label {
+  fill: var(--ink);
+  font: 900 0.2px var(--font-play);
+  font-size: 0.2px;
+  text-anchor: middle;
+}
+
+.spinner-pointer {
+  fill: var(--ink);
+}
+
+.tree {
+  width: min(100%, 460px);
+}
+
+.tree-branch {
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+}
+
+.tree-label {
+  fill: var(--ink);
+  font: 900 16px var(--font-play);
+  text-anchor: middle;
+}
+
+.tree-outcome {
+  fill: var(--w-deep);
+  font: 800 14px var(--font-play);
+}
+
+.net-face {
+  fill: color-mix(in srgb, var(--w) 25%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.net-tri {
+  fill: color-mix(in srgb, var(--sun) 40%, #fff);
+}
+
+.slice-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.slice-plane {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slice-plane path {
+  fill: color-mix(in srgb, var(--berry) 35%, transparent);
+  stroke: var(--berry-deep);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.nl-ray line {
+  stroke: var(--w-deep);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.nl-open {
+  fill: #fff;
+  stroke: var(--w-deep);
+  stroke-width: 4;
+}
+
+.nl-closed {
+  fill: var(--w-deep);
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.dots-pair {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.box-second .box-body {
+  fill: color-mix(in srgb, var(--sun) 45%, #fff);
+  stroke: var(--sun-deep);
+}
+
+.start-label {
+  text-anchor: start;
+  font-weight: 800;
+}
+
+.nl-ray-head {
+  fill: var(--w-deep);
+}
+
+/* ------------------------------------------- triangles, circle parts, solids */
+
+.angle-label.mid {
+  font-size: 19px;
+}
+
+.vertex-name {
+  fill: var(--ink-soft);
+  font: 800 17px var(--font-read);
+  font-style: italic;
+  text-anchor: middle;
+}
+
+.cp-circle {
+  fill: color-mix(in srgb, var(--w) 14%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 4;
+}
+
+.cp-arc {
+  fill: none;
+  stroke: var(--sun-deep);
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+
+.cp-line {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.cp-tangent {
+  stroke: var(--grape);
+}
+
+.cp-point {
+  fill: var(--ink);
+}
+
+.tv-chevron {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.solid-svg {
+  width: min(100%, 340px);
+}
+
+.solid-body,
+.solid-top {
+  fill: color-mix(in srgb, var(--w) 22%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.solid-top {
+  fill: color-mix(in srgb, var(--w) 40%, #fff);
+}
+
+.solid-hidden {
+  fill: none;
+  stroke: var(--w-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 7 6;
+}
+
+.solid-edge {
+  fill: none;
+  stroke: var(--w-deep);
+  stroke-width: 4;
+}
+
+.solid-dim {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.solid-dim.dashed {
+  stroke-dasharray: 6 5;
+}
+
+.plot-region {
+  stroke: none;
+}
+
+.tree-prob {
+  fill: var(--grape-deep);
+  font: 800 13px var(--font-play);
+  text-anchor: middle;
+}
+
+/* ---------------------------------------------------------------- matrices */
+
+.matrices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  max-width: 100%;
+  font: 800 clamp(1.1rem, 4.6vw, 1.5rem) var(--font-play);
+}
+
+.matrix-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.matrix-name {
+  font-style: italic;
+}
+
+/* Square brackets: borders on two narrow side strips. */
+.matrix {
+  position: relative;
+  display: inline-grid;
+  gap: 4px 16px;
+  padding: 6px 14px;
+  text-align: center;
+}
+
+.matrix::before,
+.matrix::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  border: 3px solid var(--ink);
+}
+
+.matrix::before {
+  left: 0;
+  border-right: 0;
+}
+
+.matrix::after {
+  right: 0;
+  border-left: 0;
+}
+
+.matrix-cell {
+  min-width: 1.4em;
+  min-height: 1.3em;
+}
+
+.matrix-cell.ask {
+  padding: 0 4px;
+  border-radius: 8px;
+  color: var(--w-deep);
+  outline: 3px dashed var(--w-deep);
+  outline-offset: -1px;
+}
+
+.matrix-op {
+  font-size: 1.3em;
+}
+
+.plot-axis-title {
+  fill: var(--ink-soft);
+  font: 700 14px var(--font-read);
+  text-anchor: middle;
+}
