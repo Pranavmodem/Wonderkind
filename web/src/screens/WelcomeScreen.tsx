@@ -60,7 +60,7 @@ export function WelcomeScreen({ name: savedName, buddy: savedBuddy, age: savedAg
         <ol className="onboard-dots" aria-label={`Step ${at + 1} of ${STEPS.length}`}>
           {STEPS.map((s, i) => (
             <li key={s}>
-              <button type="button" className={`dot${i === at ? " on" : i < at ? " done" : ""}`} aria-label={`Step ${i + 1}`} onClick={() => setStep(s)} />
+              <button type="button" className={`onboard-dot${i === at ? " on" : i < at ? " done" : ""}`} aria-label={`Step ${i + 1}`} onClick={() => setStep(s)} />
             </li>
           ))}
         </ol>
