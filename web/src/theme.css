@@ -1,0 +1,1016 @@
+/*
+ * Wonderkind's look: one design system, two palettes.
+ *
+ * Night is a galaxy (deep indigo, nebula haze, stardust). Day is a lavender dawn. Both use frosted
+ * glass for controls and cards, lanterns along the trail (lit violet into magenta when a lesson is
+ * done), floating space props, violet and magenta for "right" and soft rose for "not yet", and one
+ * pill button per screen (white at night, deep violet by day).
+ *
+ * Every rule below reads tokens; the two token sets are at the top. Loaded last, so it restyles
+ * the screens built in styles.css and screens.css.
+ */
+
+/* ------------------------------------------------------------------ day */
+
+:root {
+  --text: #241a5c;
+  --text-soft: #6b62a0;
+  --veil: rgb(255 255 255 / 0.55);
+  --veil-2: rgb(255 255 255 / 0.78);
+  --rim: rgb(80 60 180 / 0.14);
+  --accent: #6d4cff;
+  --accent-2: #c03fd0;
+  --accent-soft: rgb(109 76 255 / 0.12);
+  --accent-glow: rgb(109 76 255 / 0.35);
+  --rose: #e8487a;
+  --rose-soft: rgb(232 72 122 / 0.1);
+  --glow-grad: linear-gradient(90deg, #7c5cff, #c45ee0);
+  --glow-grad-v: linear-gradient(180deg, #9d8bff, #7c5cff 55%, #c45ee0);
+  --pill-bg: #241a6b;
+  --pill-text: #ffffff;
+  --pill-shadow: 0 8px 24px rgb(36 26 107 / 0.25);
+  --chip-on-bg: #241a6b;
+  --chip-on-text: #ffffff;
+  --header-bg: rgb(244 240 255 / 0.78);
+  --header-solid: rgb(240 235 255 / 0.95);
+  --sheet-bg: rgb(250 248 255 / 0.94);
+  --card-strong: linear-gradient(180deg, #ffffff, #f4f0ff);
+  --lantern: radial-gradient(circle at 50% 35%, #ffffff, #efeaff 75%);
+  --lantern-locked: radial-gradient(circle at 50% 35%, #e9e4fb, #ddd6f5 80%);
+  --locked-ink: rgb(36 26 107 / 0.35);
+  --lantern-lit: radial-gradient(circle at 50% 40%, #ffffff 0%, #d6c8ff 22%, #7c5cff 50%, #c45ee0 86%, #6a3fd0 100%);
+  --lantern-lit-glow: 0 0 26px 4px rgb(124 92 255 / 0.35);
+  --star-on: #8b6bff;
+  --star-off: rgb(36 26 107 / 0.14);
+  --trail: rgb(80 60 180 / 0.35);
+  --trail-lit: #8b6bff;
+  --picture-bg: rgb(255 255 255 / 0.72);
+  --sky:
+    radial-gradient(45vmax 30vmax at 85% 12%, rgb(255 170 220 / 0.45), transparent 70%),
+    radial-gradient(50vmax 34vmax at 8% 55%, rgb(160 180 255 / 0.45), transparent 70%),
+    radial-gradient(40vmax 28vmax at 70% 95%, rgb(200 170 255 / 0.4), transparent 70%),
+    linear-gradient(180deg, #f3eeff, #e3dbff 70%);
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------- night */
+
+:root[data-theme="dark"] {
+  --text: #f6f2ff;
+  --text-soft: #b9addb;
+  --veil: rgb(255 255 255 / 0.06);
+  --veil-2: rgb(255 255 255 / 0.11);
+  --rim: rgb(255 255 255 / 0.12);
+  --accent: #9d8bff;
+  --accent-2: #d14fd8;
+  --accent-soft: rgb(157 139 255 / 0.15);
+  --accent-glow: rgb(157 120 255 / 0.55);
+  --rose: #ff5c8a;
+  --rose-soft: rgb(255 92 138 / 0.12);
+  --pill-bg: #ffffff;
+  --pill-text: #1a1236;
+  --pill-shadow: 0 8px 30px rgb(157 139 255 / 0.35);
+  --chip-on-bg: #f6f2ff;
+  --chip-on-text: #140e2c;
+  --header-bg: rgb(17 11 36 / 0.72);
+  --header-solid: rgb(17 11 36 / 0.92);
+  --sheet-bg: rgb(22 15 46 / 0.92);
+  --card-strong: linear-gradient(180deg, #2a1d56, #1a1236);
+  --lantern: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--w) 22%, #261a4d), #1a1236 75%);
+  --lantern-locked: radial-gradient(circle at 50% 35%, #2a2350, #110b24 80%);
+  --locked-ink: rgb(169 184 255 / 0.55);
+  --lantern-lit: radial-gradient(circle at 50% 40%, #f7f3ff 0%, #d6c8ff 22%, #7c5cff 48%, #d14fd8 86%, #3f2fa8 100%);
+  --lantern-lit-glow: 0 0 30px 6px rgb(124 92 255 / 0.55), 0 0 70px 14px rgb(209 79 216 / 0.22);
+  --star-on: #e9e1ff;
+  --star-off: rgb(255 255 255 / 0.1);
+  --trail: rgb(255 255 255 / 0.18);
+  --trail-lit: #d4c8ff;
+  --picture-bg: rgb(255 255 255 / 0.06);
+  --sky:
+    radial-gradient(45vmax 30vmax at 82% 18%, rgb(196 94 224 / 0.22), transparent 70%),
+    radial-gradient(50vmax 34vmax at 12% 62%, rgb(91 69 224 / 0.26), transparent 70%),
+    radial-gradient(40vmax 26vmax at 70% 92%, rgb(44 160 200 / 0.14), transparent 70%),
+    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.8), transparent),
+    radial-gradient(1px 1px at 72% 12%, rgb(255 255 255 / 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 38% 42%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1px 1px at 88% 56%, rgb(255 255 255 / 0.55), transparent),
+    radial-gradient(1px 1px at 22% 76%, rgb(255 255 255 / 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 64% 88%, rgb(255 255 255 / 0.4), transparent),
+    radial-gradient(1px 1px at 52% 28%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1px 1px at 6% 44%, rgb(255 255 255 / 0.45), transparent),
+    radial-gradient(1px 1px at 94% 34%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 30% 96%, rgb(255 255 255 / 0.35), transparent),
+    linear-gradient(180deg, #1a1238, #0d0920 70%);
+
+  color-scheme: dark;
+}
+
+/* No yellow or orange anywhere: sun becomes orchid, tangerine periwinkle, oops rose (both palettes). */
+:root {
+  --sun: #e879f9;
+  --sun-deep: #a83bbd;
+  --sun-soft: #fae3fd;
+  --sun-on: #ffffff;
+  --tangerine: #8b8cff;
+  --tangerine-deep: #5556d6;
+  --tangerine-soft: #e6e6ff;
+  --tangerine-on: #ffffff;
+  --oops: #ff5c8a;
+  --oops-soft: #ffe3ec;
+}
+
+/* Kept for older rules (onboarding, learn mode) that read these names. */
+:root {
+  --warm: var(--text);
+  --warm-soft: var(--text-soft);
+}
+
+body {
+  background: var(--sky);
+  background-attachment: fixed;
+  color: var(--text);
+}
+
+/* --------------------------------------------------- stardust (night) */
+
+.fireflies {
+  display: none;
+}
+
+[data-theme="dark"] .fireflies {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .fireflies i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f1ebff;
+  box-shadow:
+    0 0 8px 2px rgb(196 180 255 / 0.65),
+    0 0 22px 6px rgb(157 120 255 / 0.18);
+  opacity: 0;
+  animation: firefly calc(7s + var(--i) * 0.6s) ease-in-out calc(var(--i) * -1.3s) infinite;
+}
+
+@keyframes firefly {
+  0%,
+  100% {
+    opacity: 0;
+    translate: 0 0;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.35;
+    translate: 18px -26px;
+  }
+  70% {
+    opacity: 0.85;
+    translate: -10px -44px;
+  }
+}
+
+/* ------------------------------------------------------------------- map */
+
+.map {
+  background: none;
+  color: var(--text);
+}
+
+.map-top,
+.gu-top {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--rim);
+  color: var(--text);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+.me:hover {
+  background: var(--veil);
+}
+
+.me-buddy,
+.here-buddy {
+  background: radial-gradient(circle at 50% 70%, var(--accent-soft), transparent 70%), var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.total-stars {
+  padding: 4px 12px 4px 8px;
+  border-radius: 999px;
+  background: var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+  color: var(--text);
+}
+
+.star.on path {
+  fill: var(--star-on);
+  stroke: var(--star-on);
+  filter: drop-shadow(0 0 4px var(--accent-glow));
+}
+
+.star:not(.on) path {
+  fill: var(--star-off);
+  stroke: var(--rim);
+}
+
+.grownups-btn,
+.speed-btn,
+.map .icon-btn {
+  border: 0;
+  background: var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+  color: var(--text);
+}
+
+.speed-btn {
+  color: var(--accent);
+}
+
+.subject-tabs {
+  background: var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.subject-tab {
+  color: var(--text-soft);
+}
+
+.subject-tab.on {
+  background: var(--glow-grad-v);
+  color: #fff;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.25),
+    0 6px 22px var(--accent-glow);
+}
+
+.band-chips {
+  background: linear-gradient(var(--header-solid) 70%, transparent);
+}
+
+.chip {
+  border: 0;
+  background: var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+  color: var(--text-soft);
+}
+
+.chip-on {
+  background: var(--chip-on-bg);
+  color: var(--chip-on-text);
+  box-shadow: 0 0 18px var(--accent-soft);
+}
+
+.band-title {
+  color: var(--text);
+}
+
+.band-title small,
+.world-name p {
+  color: var(--text-soft);
+}
+
+/* A world is a clearing on the map, not a box: its name, then the trail. */
+.world {
+  background: radial-gradient(90% 60% at 50% 30%, color-mix(in srgb, var(--w) 10%, transparent), transparent 70%);
+}
+
+.world-head {
+  border: 0;
+  background: var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+  color: var(--text);
+  backdrop-filter: blur(10px);
+}
+
+.world-symbol {
+  background: radial-gradient(circle at 40% 30%, color-mix(in srgb, var(--w) 55%, #fff), var(--w) 55%, var(--w-deep));
+  box-shadow: 0 0 22px color-mix(in srgb, var(--w) 45%, transparent);
+}
+
+.world-stars {
+  color: var(--text-soft);
+}
+
+/* The trail: faint dots, glowing up to where the kid has reached. */
+.trail-path path {
+  stroke: var(--trail);
+  opacity: 1;
+}
+
+.trail-path .trail-lit {
+  stroke: var(--trail-lit);
+  filter: drop-shadow(0 0 3px var(--accent-glow));
+}
+
+/* Space props float beside the trail with a soft halo, in both palettes. */
+.scenery {
+  width: clamp(64px, 18vw, 86px);
+  place-items: center;
+  animation: drift 7s ease-in-out calc(var(--n, 0) * -1.1s) infinite;
+}
+
+.scenery::after {
+  display: none;
+}
+
+.scenery .prop-day {
+  display: none;
+}
+
+.scenery .prop-night {
+  display: block;
+  filter: drop-shadow(0 0 14px var(--accent-soft));
+}
+
+@keyframes drift {
+  50% {
+    translate: 0 -8px;
+    rotate: 3deg;
+  }
+}
+
+/* Lanterns. Unlit: glass with a rim of the world's colour. */
+.node {
+  background: var(--lantern);
+  color: color-mix(in srgb, var(--w) 70%, var(--text));
+  box-shadow:
+    inset 0 0 0 3px color-mix(in srgb, var(--w) 75%, transparent),
+    inset 0 8px 14px rgb(255 255 255 / 0.06),
+    0 8px 18px rgb(20 10 60 / 0.25);
+}
+
+/* Lit: violet into magenta, ringed by the world's colour, glowing. */
+.node.cleared {
+  background: var(--lantern-lit);
+  color: #fff;
+  text-shadow: 0 1px 6px rgb(40 20 120 / 0.6);
+  box-shadow:
+    inset 0 -6px 12px rgb(30 10 90 / 0.3),
+    inset 0 4px 0 rgb(255 255 255 / 0.35),
+    0 0 0 3px color-mix(in srgb, var(--w) 80%, transparent),
+    var(--lantern-lit-glow);
+}
+
+/* Not yet reachable: a cold, dim lantern. */
+.node.locked {
+  background: var(--lantern-locked);
+  color: var(--locked-ink);
+  box-shadow:
+    inset 0 0 0 2px var(--rim),
+    0 6px 14px rgb(20 10 60 / 0.2);
+}
+
+/* The next lesson pulses, waiting to be lit. */
+.stop.next .node {
+  box-shadow:
+    inset 0 0 0 3px var(--w),
+    0 0 0 8px color-mix(in srgb, var(--w) 18%, transparent),
+    0 0 40px 8px color-mix(in srgb, var(--w) 40%, transparent);
+  animation: lantern 2.6s ease-in-out infinite;
+}
+
+@keyframes lantern {
+  50% {
+    box-shadow:
+      inset 0 0 0 3px var(--w),
+      0 0 0 12px color-mix(in srgb, var(--w) 12%, transparent),
+      0 0 56px 14px color-mix(in srgb, var(--w) 50%, transparent);
+  }
+}
+
+.stop-title {
+  background: none;
+  color: var(--text);
+}
+
+[data-theme="dark"] .stop-title {
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.8);
+}
+
+.stop:has(.locked) .stop-title {
+  color: var(--text-soft);
+}
+
+.here-say {
+  border: 0;
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  box-shadow: var(--pill-shadow);
+}
+
+/* --------------------------------------------------- sheets and dialogs */
+
+.level-sheet,
+.modal {
+  background: var(--card-strong);
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    0 -10px 40px rgb(20 10 60 / 0.35);
+}
+
+.level-sheet-world,
+.modal p {
+  color: var(--text-soft);
+}
+
+.level-sheet-idea {
+  background: var(--veil);
+  color: var(--text);
+}
+
+.link {
+  color: var(--text-soft);
+}
+
+/* The main action: one pill per screen. */
+.done-screen .btn,
+.drill .btn:not(.btn-danger),
+.level-sheet .btn,
+.modal .btn {
+  --b: var(--pill-bg);
+  --b-deep: rgb(0 0 0 / 0.25);
+  --b-on: var(--pill-text);
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  box-shadow: var(--pill-shadow);
+}
+
+.level-sheet .btn + .btn,
+.done-screen .btn + .btn,
+.modal .btn + .btn {
+  background: var(--veil-2);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+/* ------------------------------------------------------------------ done */
+
+.done-screen {
+  background: none;
+  color: var(--text);
+}
+
+.done-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(closest-side, var(--accent-glow), rgb(209 79 216 / 0.18) 55%, transparent);
+}
+
+.burst {
+  background: repeating-conic-gradient(from 0deg, var(--accent-soft) 0deg 8deg, transparent 8deg 20deg);
+}
+
+.done-title {
+  color: var(--text);
+  text-shadow: 0 0 30px var(--accent-glow);
+}
+
+.done-level,
+.done-tip {
+  color: var(--text-soft);
+}
+
+.done-stat strong {
+  color: var(--accent);
+}
+
+.done-best {
+  background: var(--glow-grad);
+  color: #fff;
+}
+
+/* ------------------------------------------------------------- lessons */
+
+.play {
+  background: radial-gradient(70vw 50vh at 50% -10%, color-mix(in srgb, var(--w) 22%, transparent), transparent 70%);
+  color: var(--text);
+}
+
+.play-deco {
+  display: none;
+}
+
+.play-top .icon-btn,
+.play-top > button {
+  border-radius: 50%;
+  background: var(--veil);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.progress {
+  height: 14px;
+  background: var(--veil-2);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.progress span {
+  background: var(--glow-grad);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.bubble {
+  border: 0;
+  background: var(--veil-2);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--rim);
+  backdrop-filter: blur(10px);
+}
+
+.bubble::before,
+.bubble::after {
+  display: none;
+}
+
+.bubble-hint {
+  background: var(--rose-soft);
+  box-shadow: inset 0 0 0 1px var(--rose);
+}
+
+.speak {
+  border-radius: 50%;
+  background: var(--veil);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+/* The picture sits on glass like everything else (see "pictures at night" below). */
+.visual {
+  background: var(--picture-bg);
+  box-shadow: inset 0 0 0 1px var(--rim);
+  backdrop-filter: blur(8px);
+}
+
+.badge {
+  background: linear-gradient(180deg, #8b7bff, #5b45e0);
+}
+
+.equation,
+.answer-line {
+  color: var(--text);
+}
+
+.sym {
+  color: var(--text-soft);
+}
+
+.blank {
+  border: 3px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  background: var(--veil);
+  color: var(--text);
+}
+
+.blank-correct {
+  border: 0;
+  background: var(--glow-grad-v);
+  color: #fff;
+  box-shadow: 0 0 22px var(--accent-glow);
+}
+
+.blank-revealed {
+  border: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.blank-wrong {
+  border-color: var(--rose);
+  background: var(--rose-soft);
+}
+
+/* Answer tiles: glass at rest, glowing violet when right. */
+.choice {
+  --t: var(--veil-2);
+  --t-edge: var(--rim);
+  --t-deep: rgb(20 10 60 / 0.2);
+  border-width: 1px;
+  background: linear-gradient(180deg, var(--veil-2), var(--veil));
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    0 6px 0 var(--t-deep);
+  backdrop-filter: blur(8px);
+}
+
+.choice:disabled {
+  opacity: 1;
+}
+
+.choice.wrong {
+  border-color: color-mix(in srgb, var(--rose) 50%, transparent);
+  background: var(--rose-soft);
+  color: color-mix(in srgb, var(--text) 40%, transparent);
+  text-decoration-color: var(--rose);
+}
+
+.choice.answer-correct {
+  border-color: transparent;
+  background: var(--glow-grad-v);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    0 6px 0 #4a2fb8,
+    0 0 34px var(--accent-glow);
+}
+
+.choice.answer-revealed {
+  border: 2px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+  box-shadow: 0 0 24px var(--accent-soft);
+}
+
+.choices:has(.answer-correct, .answer-revealed) .choice:not(.answer-correct, .answer-revealed, .wrong) {
+  opacity: 0.35;
+}
+
+.key {
+  border: 1px solid var(--rim);
+  background: linear-gradient(180deg, var(--veil-2), var(--veil));
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    0 5px 0 rgb(20 10 60 / 0.2);
+}
+
+.key-back {
+  color: var(--text-soft);
+}
+
+.key-check {
+  border-color: transparent;
+  background: var(--glow-grad-v);
+  color: #fff;
+  box-shadow:
+    0 5px 0 #4a2fb8,
+    0 0 24px var(--accent-glow);
+}
+
+.key-check:disabled {
+  background: var(--veil);
+  color: var(--text-soft);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+/* Feedback: a glass sheet with a glowing edge, readable text and the pill. */
+.sheet {
+  border-top: 0;
+  background: var(--sheet-bg);
+  color: var(--text);
+  box-shadow:
+    0 -1px 0 var(--rim),
+    0 -18px 50px var(--accent-soft);
+  backdrop-filter: blur(18px);
+}
+
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--glow-grad);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.sheet-revealed {
+  background: var(--sheet-bg);
+}
+
+.sheet-revealed::before {
+  background: linear-gradient(90deg, #ff8fb1, #9d8bff);
+}
+
+.sheet-title,
+.sheet-revealed .sheet-title {
+  color: var(--text);
+}
+
+.sheet-body,
+.sheet-text p {
+  color: var(--text-soft);
+}
+
+.btn-sheet,
+.sheet-revealed .btn-sheet {
+  --b: var(--pill-bg);
+  --b-deep: rgb(0 0 0 / 0.25);
+  --b-on: var(--pill-text);
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  box-shadow: var(--pill-shadow);
+}
+
+.can.flare .can-badge {
+  border-color: var(--veil-2);
+  background: var(--glow-grad-v);
+  color: #fff;
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* ---------------------------------------------------------- learn mode */
+
+.learn-steps li {
+  background: var(--veil);
+  color: var(--text-soft);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.learn-steps li.step-done {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.learn-steps li.on {
+  background: var(--glow-grad-v);
+  color: #fff;
+  box-shadow: 0 0 18px var(--accent-glow);
+}
+
+.learn-idea {
+  background: radial-gradient(80% 120% at 50% 0%, color-mix(in srgb, var(--w) 26%, transparent), transparent 70%), var(--veil);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.learn-kicker {
+  color: var(--text-soft);
+}
+
+.learn-idea h1 {
+  color: var(--text);
+  text-shadow: 0 0 26px color-mix(in srgb, var(--w) 60%, transparent);
+}
+
+.learn-bar {
+  background: var(--sheet-bg);
+  border-top: 1px solid var(--rim);
+  backdrop-filter: blur(16px);
+}
+
+.learn-bar .btn {
+  --b: var(--pill-bg);
+  --b-deep: rgb(0 0 0 / 0.25);
+  --b-on: var(--pill-text);
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  box-shadow: var(--pill-shadow);
+}
+
+/* --------------------------------------------------- drill, grown-ups */
+
+.drill,
+.grownups {
+  color: var(--text);
+}
+
+.gu-card,
+.drill-setup {
+  border: 0;
+  background: var(--veil);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+.gu-note,
+.gu-label,
+.toggle-row small,
+.gu-band-title small,
+.gu-standards small,
+.seg span {
+  color: var(--text-soft);
+}
+
+.seg {
+  border-color: var(--rim);
+  background: var(--veil);
+  color: var(--text);
+}
+
+.seg.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.gu-grade-btn {
+  background: var(--veil);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .scenery,
+  .stop.next .node,
+  [data-theme="dark"] .fireflies i {
+    animation: none;
+  }
+
+  [data-theme="dark"] .fireflies i {
+    opacity: 0.5;
+  }
+}
+
+/* ------------------------------------------------------ phone header */
+
+@media (max-width: 480px) {
+  .map-top {
+    gap: 6px;
+  }
+
+  .map-top .me-name {
+    display: none;
+  }
+
+  .map-top .grownups-btn {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+    gap: 0;
+  }
+
+  .map-top .speed-btn {
+    padding: 0 12px;
+  }
+}
+
+/* ------------------------------------------------- pictures at night
+ * Pictures sit on dark glass, so inside them the drawing ink turns light and paper turns to glass.
+ * Things that are objects in their own right (a clock face, a coin, a ruler) keep their own colours.
+ */
+
+[data-theme="dark"] .visual,
+[data-theme="dark"] .activity-work {
+  --ink: #f2eeff;
+  --ink-soft: #c9bfe8;
+  --card: rgb(255 255 255 / 0.08);
+  --line: rgb(255 255 255 / 0.16);
+  --paper: transparent;
+  --w-soft: color-mix(in srgb, var(--w) 20%, transparent);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .activity-work {
+  --w-soft: color-mix(in srgb, var(--w) 10%, transparent);
+  background: var(--picture-bg);
+  box-shadow: inset 0 0 0 1px var(--rim);
+}
+
+/* Paper-white parts of drawings become glass tinted with the world's colour at night. */
+[data-theme="dark"] :is(.visual, .activity-work) :is(.rect-body, .rect-edge-fill, .net-face, .cp-circle, .uc-circle, .solid-body, .solid-top) {
+  fill: color-mix(in srgb, var(--w) 26%, transparent);
+}
+
+[data-theme="dark"] :is(.visual, .activity-work) :is(.box-top, .box-body, .net-tri) {
+  fill: color-mix(in srgb, var(--w) 38%, transparent);
+}
+
+[data-theme="dark"] :is(.visual, .activity-work) :is(.grid-bg, .venn-box, .clock-face, .scale-dial, .slice-target, .slice-empty) {
+  fill: rgb(255 255 255 / 0.05);
+}
+
+[data-theme="dark"] :is(.visual, .activity-work) :is(.plot-point.open, .nl-open) {
+  fill: #1a1236;
+}
+
+[data-theme="dark"] :is(.visual, .activity-work) .scene {
+  background: linear-gradient(rgb(255 255 255 / 0.04) 60%, color-mix(in srgb, var(--w) 22%, transparent) 60%);
+}
+
+[data-theme="dark"] :is(.act-tray, .act-chip, .act-bin, .trace-pad) {
+  background: rgb(255 255 255 / 0.07);
+  color: var(--ink);
+  border-color: rgb(255 255 255 / 0.2);
+}
+
+/* Every Check is the screen's main action: the pill. */
+.act-check {
+  --b: var(--pill-bg);
+  --b-deep: rgb(0 0 0 / 0.25);
+  --b-on: var(--pill-text);
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  box-shadow: var(--pill-shadow);
+}
+
+/* Answer tiles share one glass look; their old per-tile colours stay out of the rim. */
+.choice:is(.tile-0, .tile-1, .tile-2, .tile-3) {
+  --t-edge: var(--rim);
+  --t-deep: rgb(20 10 60 / 0.2);
+  border-color: var(--rim);
+}
+
+/* Science pictures at night: text chips become glass, paper surfaces become dark glass, tinted fills
+   keep their tint over the night instead of over white. */
+[data-theme="dark"]
+  :is(.ph-chip, .ph-pick, .chem-blank-box, .chem-tile-extra div, .chem-shape-name, .chem-term, .chem-nuc-line, .chem-object, .chem-prop.ask, .mat-unknown, .chem-change-step) {
+  background: rgb(255 255 255 / 0.08);
+  border-color: rgb(255 255 255 / 0.2);
+  color: var(--ink);
+}
+
+[data-theme="dark"]
+  :is(.ph-meter-body, .ph-tap-zone, .ph-medium, .ph-medium-1, .ph-medium-2.light, .ph-screen, .ph-chain-node, .ph-wave-bg, .ph-bulb-glass, .ph-tube, .chem-container, .chem-pt-cell rect, .chem-pt-cell.asked rect, .chem-zoom-bg, .chem-meter, .chem-ask-rect, .chem-thermo-tube, .chem-burette-glass) {
+  fill: rgb(255 255 255 / 0.06);
+}
+
+[data-theme="dark"] .ph-box {
+  fill: color-mix(in srgb, var(--w) 40%, transparent);
+}
+
+[data-theme="dark"] .ph-ramp,
+[data-theme="dark"] .ph-cliff {
+  fill: color-mix(in srgb, var(--cocoa) 45%, transparent);
+}
+
+[data-theme="dark"] .ph-liquid-back {
+  fill: color-mix(in srgb, var(--wave) 18%, transparent);
+}
+
+[data-theme="dark"] .ph-liquid.solid,
+[data-theme="dark"] .ph-medium-2,
+[data-theme="dark"] .ph-lens,
+[data-theme="dark"] .ph-mirror,
+[data-theme="dark"] .ph-slab.transparent rect {
+  fill: color-mix(in srgb, var(--wave) 35%, transparent);
+}
+
+[data-theme="dark"] .ph-slab.translucent rect {
+  fill: rgb(255 255 255 / 0.35);
+}
+
+[data-theme="dark"] .ph-gas {
+  fill: color-mix(in srgb, var(--grape) 18%, transparent);
+}
+
+[data-theme="dark"] .chem-container.open {
+  fill: color-mix(in srgb, var(--w) 10%, transparent);
+}
+
+[data-theme="dark"] .chem-lobe {
+  fill: color-mix(in srgb, var(--grape) 35%, transparent);
+}
+
+[data-theme="dark"] .chem-nuc-blob {
+  fill: color-mix(in srgb, var(--berry) 30%, transparent);
+}
+
+/* Small secondary buttons inside activities (Undo, Start over, Go!) are glass too. */
+[data-theme="dark"] .activity-work :is(button:not(.act-check):not(.key):not(.choice)) {
+  border-color: rgb(255 255 255 / 0.18);
+}
+
+/* Quiet buttons (Undo, Start over, Not now): glass in both palettes. */
+.btn-quiet {
+  --b: var(--veil-2);
+  --b-deep: rgb(20 10 60 / 0.18);
+  --b-on: var(--text);
+  background: var(--veil-2);
+  color: var(--text);
+  box-shadow:
+    inset 0 0 0 1px var(--rim),
+    0 3px 0 rgb(20 10 60 / 0.15);
+}
+
+/* Drawing text at night gets a soft dark halo, so it reads over light liquids, tiles and fills. */
+[data-theme="dark"] :is(.visual, .activity-work) svg text {
+  paint-order: stroke;
+  stroke: rgb(13 9 32 / 0.7);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+[data-theme="dark"] :is(.chem-bal-term, .chem-readout, .chem-weight-btn.remove) {
+  background: rgb(255 255 255 / 0.08);
+  border-color: rgb(255 255 255 / 0.2);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .chem-tile-bg {
+  fill: rgb(255 255 255 / 0.08);
+}
+
+/* Cells and blocks with a light status colour keep dark text. */
+[data-theme="dark"] :is(.visual, .activity-work) td,
+[data-theme="dark"] .area-box.area-11 {
+  color: #1a1236;
+}
+
+[data-theme="dark"] :is(.visual, .activity-work) .vtable td {
+  color: var(--ink);
+}

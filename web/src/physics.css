@@ -1,0 +1,1368 @@
+/* Physics pictures and activities (components/science/PhysicsVisuals, PhysicsActivities). */
+
+/* ------------------------------------------------------------- shared */
+
+.ph-svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.ph-label {
+  fill: var(--ink);
+  font-family: var(--font-play);
+  font-weight: 800;
+}
+
+.ph-md {
+  font-size: 20px;
+}
+
+.ph-sm {
+  font-size: 18px;
+}
+
+.ph-lg {
+  font-size: 24px;
+}
+
+.ph-sub {
+  font-size: 0.72em;
+}
+
+.ph-label.ask {
+  fill: var(--w-deep);
+  font-weight: 900;
+}
+
+.halo,
+.ph-note,
+.ph-tiny {
+  paint-order: stroke;
+  stroke: var(--w-soft, #fff);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.ph-label.ph-on-dark {
+  fill: #fff;
+}
+
+.ph-note {
+  fill: var(--ink-soft);
+  font: 700 16px var(--font-read);
+}
+
+.ph-caption {
+  fill: var(--ink);
+  font-weight: 700;
+}
+
+.ph-tiny {
+  fill: var(--ink-soft);
+  font: 700 15px var(--font-play);
+}
+
+.ph-tiny.strong {
+  fill: var(--ink);
+  font-weight: 800;
+}
+
+.ph-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.ph-flip {
+  transform: scaleX(-1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ph-dim-line {
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+}
+
+.ph-ground-line {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ph-hatch {
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.ph-angle-arc {
+  fill: none;
+  stroke: var(--sun-deep);
+  stroke-width: 3.5;
+}
+
+.ph-right-mark {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+}
+
+.ph-eq {
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+  stroke-dasharray: 7 6;
+}
+
+.ph-eq.faint {
+  stroke: var(--tin-deep);
+  stroke-dasharray: 3 5;
+}
+
+.ph-axis {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.ph-tick {
+  fill: var(--ink);
+  font: 800 16px var(--font-play);
+}
+
+.ph-grid {
+  stroke: color-mix(in srgb, var(--w) 25%, #fff);
+  stroke-width: 1.5;
+}
+
+/* ------------------------------------------------------------- forces */
+
+.ph-box {
+  fill: color-mix(in srgb, var(--w) 25%, #fff);
+  stroke: var(--w-deep);
+  stroke-width: 4;
+}
+
+.ph-box-x {
+  stroke: color-mix(in srgb, var(--w-deep) 35%, #fff);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.ph-dot-obj {
+  fill: var(--ink);
+}
+
+.ph-ramp {
+  fill: color-mix(in srgb, var(--cocoa) 22%, #fff);
+  stroke: var(--cocoa-deep);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
+.ph-string {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* ------------------------------------------------------------- motion */
+
+.ph-lane {
+  stroke: var(--line);
+  stroke-width: 3;
+  stroke-dasharray: 2 8;
+  stroke-linecap: round;
+}
+
+.ph-strobe {
+  stroke-width: 3;
+}
+
+.ph-finish {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+
+.ph-track {
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.ph-cart {
+  stroke-width: 3.5;
+}
+
+.ph-cart + .ph-cart {
+  stroke-dasharray: none;
+}
+
+.ph-wheel {
+  fill: var(--ink);
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+/* --------------------------------------------------------- oscillator */
+
+.ph-spring {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ph-mass {
+  fill: var(--w);
+  stroke: var(--w-deep);
+  stroke-width: 3.5;
+}
+
+.ph-bob {
+  fill: var(--berry);
+  stroke: var(--berry-deep);
+  stroke-width: 3.5;
+}
+
+.ph-pivot {
+  fill: var(--ink);
+}
+
+.ph-swing-arc {
+  fill: none;
+  stroke: var(--tin-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 4 6;
+}
+
+.ph-ghost {
+  opacity: 0.3;
+}
+
+.ph-anim .ph-osc-mass {
+  transform-box: view-box;
+  animation: ph-osc-x 1.6s ease-in-out infinite alternate;
+}
+
+.ph-anim .ph-osc-mass.vert {
+  animation-name: ph-osc-y;
+}
+
+.ph-anim .ph-osc-coil {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: ph-osc-s 1.6s ease-in-out infinite alternate;
+}
+
+.ph-anim .ph-swing {
+  transform-box: view-box;
+  transform-origin: 210px 34px;
+  animation: ph-swing 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes ph-osc-x {
+  from {
+    transform: translateX(calc(var(--amp) * -1px));
+  }
+  to {
+    transform: translateX(calc(var(--amp) * 1px));
+  }
+}
+
+@keyframes ph-osc-y {
+  from {
+    transform: translateY(calc(var(--amp) * -1px));
+  }
+  to {
+    transform: translateY(calc(var(--amp) * 1px));
+  }
+}
+
+@keyframes ph-osc-s {
+  from {
+    transform: scaleX(var(--s0));
+  }
+  to {
+    transform: scaleX(var(--s1));
+  }
+}
+
+@keyframes ph-swing {
+  from {
+    transform: rotate(calc(var(--amp) * -1deg));
+  }
+  to {
+    transform: rotate(calc(var(--amp) * 1deg));
+  }
+}
+
+/* -------------------------------------------------------------- orbit */
+
+.ph-orbit {
+  fill: none;
+  stroke: var(--tin-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 7;
+}
+
+.ph-radius {
+  stroke: var(--ink-soft);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 5;
+}
+
+.ph-ball {
+  stroke-width: 3.5;
+}
+
+/* -------------------------------------------------------------- fluid */
+
+.ph-liquid-back {
+  fill: color-mix(in srgb, var(--wave) 10%, #fff);
+}
+
+.ph-liquid {
+  fill: var(--wave);
+  opacity: 0.32;
+}
+
+.ph-liquid.solid {
+  fill: color-mix(in srgb, var(--wave) 35%, #fff);
+  opacity: 1;
+}
+
+.ph-surface {
+  stroke: var(--wave-deep);
+  stroke-width: 3;
+}
+
+.ph-tank {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ph-block {
+  stroke-width: 3.5;
+}
+
+.ph-liquid-name {
+  fill: var(--wave-deep);
+}
+
+.ph-point {
+  fill: var(--ink);
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+.ph-jet {
+  fill: none;
+  stroke: var(--wave);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.ph-pipe {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+/* ------------------------------------------------------------ circuit */
+
+.ph-wire {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.ph-wire.thin {
+  stroke-width: 2.5;
+  stroke: var(--ink-soft);
+}
+
+.ph-wire.filled {
+  stroke: var(--leaf-deep);
+  stroke-width: 5;
+}
+
+.ph-terminal {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.ph-junction {
+  fill: var(--ink);
+}
+
+.ph-plate {
+  stroke: var(--ink);
+  stroke-linecap: round;
+}
+
+.ph-plate.long {
+  stroke-width: 4;
+}
+
+.ph-plate.short {
+  stroke-width: 8;
+}
+
+.ph-resistor {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
+.ph-bulb-glass {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.ph-filament {
+  stroke: var(--ink-soft);
+  stroke-width: 2.5;
+}
+
+.ph-bulb.lit .ph-bulb-glass {
+  fill: var(--sun);
+  stroke: var(--sun-deep);
+}
+
+.ph-bulb.lit .ph-filament {
+  stroke: var(--tangerine-deep);
+}
+
+.ph-glow-ray {
+  stroke: var(--sun-deep);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ph-meter-body {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.ph-meter-letter {
+  fill: var(--ink);
+  font: 900 19px var(--font-play);
+}
+
+.ph-meter.spinning .ph-meter-body {
+  fill: var(--leaf-soft);
+  stroke: var(--leaf-deep);
+}
+
+.ph-switch-arm {
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.ph-part-name {
+  fill: var(--ink);
+  font: 900 18px var(--font-play);
+  paint-order: stroke;
+  stroke: var(--w-soft, #fff);
+  stroke-width: 5px;
+}
+
+.ph-tap {
+  cursor: pointer;
+  outline: none;
+}
+
+.ph-tap-zone {
+  fill: #fff;
+  stroke: var(--w-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+
+.ph-tap.on .ph-tap-zone {
+  fill: var(--leaf-soft);
+  stroke: var(--leaf-deep);
+  stroke-dasharray: none;
+}
+
+.ph-tap:hover .ph-tap-zone,
+.ph-tap:focus-visible .ph-tap-zone {
+  stroke-width: 4;
+}
+
+.ph-circuit.short .ph-wire {
+  stroke: var(--berry-deep);
+}
+
+/* -------------------------------------------------------------- waves */
+
+.ph-wave {
+  fill: none;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ph-wave.ghost {
+  stroke-dasharray: 8 7;
+  opacity: 0.6;
+}
+
+.ph-medium {
+  fill: #fff;
+  stroke: var(--line);
+  stroke-width: 2;
+}
+
+.ph-coil-line {
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ph-post {
+  fill: var(--ink-soft);
+}
+
+.ph-node {
+  fill: var(--ink);
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+/* --------------------------------------------------------------- rays */
+
+.ph-ray {
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ph-ray.dashed {
+  stroke-dasharray: 6 6;
+  opacity: 0.8;
+}
+
+.ph-faint {
+  opacity: 0.4;
+}
+
+.ph-beam {
+  fill: var(--sun);
+  opacity: 0.45;
+}
+
+.ph-beam.dim {
+  opacity: 0.16;
+}
+
+.ph-torch-body {
+  fill: var(--night);
+}
+
+.ph-torch-head {
+  fill: var(--night-deep);
+  stroke: var(--night-deep);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.ph-torch-button {
+  fill: var(--berry);
+}
+
+.ph-slab rect {
+  stroke-width: 3;
+}
+
+.ph-slab.transparent rect {
+  fill: color-mix(in srgb, var(--wave) 18%, #fff);
+  fill-opacity: 0.55;
+  stroke: var(--wave);
+}
+
+.ph-slab.translucent rect {
+  fill: #fff;
+  fill-opacity: 0.85;
+  stroke: var(--tin-deep);
+  stroke-dasharray: 3 4;
+}
+
+.ph-slab.opaque rect {
+  fill: var(--cocoa);
+  stroke: var(--cocoa-deep);
+}
+
+.ph-slab.mirror rect {
+  fill: color-mix(in srgb, var(--tin) 70%, #fff);
+  stroke: var(--tin-deep);
+}
+
+.ph-glare {
+  stroke: #fff;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.ph-screen {
+  fill: #fff;
+  stroke: var(--tin-deep);
+  stroke-width: 3;
+}
+
+.ph-spot {
+  fill: var(--sun);
+}
+
+.ph-spot.dim {
+  fill: var(--sun-soft);
+  stroke: var(--sun);
+  stroke-width: 2;
+}
+
+.ph-spot.shadow {
+  fill: var(--ink-soft);
+  opacity: 0.75;
+}
+
+.ph-spot.off {
+  fill: none;
+}
+
+.ph-shadow-shape {
+  filter: brightness(0);
+  opacity: 0.7;
+}
+
+.ph-mirror {
+  fill: color-mix(in srgb, var(--wave) 30%, #fff);
+  stroke: var(--wave-deep);
+  stroke-width: 2.5;
+}
+
+.ph-normal {
+  stroke: var(--ink-soft);
+  stroke-width: 2.5;
+  stroke-dasharray: 7 6;
+}
+
+.ph-medium-1 {
+  fill: #fff;
+  opacity: 0.6;
+}
+
+.ph-medium-1.dense,
+.ph-medium-2 {
+  fill: color-mix(in srgb, var(--wave) 22%, #fff);
+}
+
+.ph-medium-2.light {
+  fill: #fff;
+  opacity: 0.6;
+}
+
+.ph-medium-1.dense {
+  opacity: 1;
+}
+
+.ph-boundary {
+  stroke: var(--wave-deep);
+  stroke-width: 3;
+}
+
+.ph-lens {
+  fill: color-mix(in srgb, var(--wave) 22%, #fff);
+  fill-opacity: 0.8;
+  stroke: var(--wave-deep);
+  stroke-width: 3;
+}
+
+.ph-curved-mirror {
+  fill: none;
+  stroke: var(--wave-deep);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.ph-focal {
+  fill: var(--ink);
+}
+
+.ph-axis-line {
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+}
+
+/* -------------------------------------------------------------- sound */
+
+.ph-drum-body {
+  fill: var(--berry);
+  stroke: var(--berry-deep);
+  stroke-width: 3;
+}
+
+.ph-drum-top {
+  fill: #fff;
+  stroke: var(--berry-deep);
+  stroke-width: 3;
+}
+
+.ph-stick {
+  stroke: var(--cocoa);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.ph-buzz {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.ph-string-v {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.ph-string-v.ghost {
+  stroke-dasharray: 5 5;
+  opacity: 0.55;
+}
+
+.ph-fork {
+  fill: none;
+  stroke: var(--tin-deep);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.ph-speaker {
+  fill: var(--night);
+  stroke: var(--night-deep);
+  stroke-width: 3;
+}
+
+.ph-cone {
+  fill: var(--tin);
+  stroke: var(--night-deep);
+  stroke-width: 3;
+}
+
+.ph-cone-in {
+  fill: var(--night-deep);
+}
+
+.ph-sound-arc {
+  fill: none;
+  stroke: var(--w-deep);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ph-sound-arc.loud {
+  stroke-width: 7;
+}
+
+.ph-anim .ph-sound-arc {
+  animation: ph-ripple 1.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.25s);
+}
+
+@keyframes ph-ripple {
+  0%,
+  100% {
+    stroke-opacity: 0.25;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+.ph-flash {
+  fill: var(--sun-deep);
+}
+
+.ph-radio {
+  fill: none;
+  stroke: var(--grape);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
+/* ------------------------------------------------------ magnets & charges */
+
+.ph-pole.north {
+  fill: var(--berry);
+}
+
+.ph-pole.south {
+  fill: var(--wave);
+}
+
+.ph-pole-letter {
+  fill: #fff;
+  font: 900 24px var(--font-play);
+}
+
+.ph-magnet-outline {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.ph-field {
+  fill: none;
+  stroke: var(--grape);
+  stroke-width: 2;
+  opacity: 0.75;
+}
+
+.ph-field-head {
+  fill: var(--grape-deep);
+}
+
+.ph-compass {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.ph-needle.north {
+  fill: var(--berry);
+}
+
+.ph-needle.south {
+  fill: var(--tin-deep);
+}
+
+.ph-field-ring {
+  fill: none;
+  stroke: var(--wave);
+  stroke-width: 2.5;
+}
+
+.ph-field-ring.back {
+  stroke-dasharray: 5 5;
+  opacity: 0.6;
+}
+
+.ph-wire-end {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3.5;
+}
+
+.ph-dot-mark {
+  fill: var(--ink);
+}
+
+.ph-x-mark {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.ph-wire-side {
+  stroke: var(--cocoa);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.ph-charge {
+  stroke-width: 3;
+}
+
+.ph-charge.pos {
+  fill: var(--berry);
+  stroke: var(--berry-deep);
+}
+
+.ph-charge.neg {
+  fill: var(--wave);
+  stroke: var(--wave-deep);
+}
+
+.ph-charge-sign {
+  fill: #fff;
+  font: 900 24px var(--font-play);
+}
+
+/* ------------------------------------------------------------- energy */
+
+.ph-chain-node {
+  fill: #fff;
+  stroke: var(--w);
+  stroke-width: 3.5;
+}
+
+.ph-ebar {
+  stroke-width: 2.5;
+}
+
+.ph-bar-ask {
+  fill: none;
+  stroke: var(--w-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+
+/* ------------------------------------------------------------- thermo */
+
+.ph-tube {
+  fill: #fff;
+  stroke: var(--ink-soft);
+  stroke-width: 3;
+}
+
+.ph-bulb-t,
+.ph-mercury {
+  fill: var(--berry);
+}
+
+.ph-bulb-t {
+  stroke: var(--berry-deep);
+  stroke-width: 3;
+}
+
+.ph-tick-line {
+  stroke: var(--ink-soft);
+  stroke-width: 2;
+}
+
+.ph-pointer {
+  stroke: var(--w-deep);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.ph-thermal {
+  stroke-width: 3.5;
+}
+
+.ph-thermal.hot {
+  fill: var(--tangerine-soft);
+  stroke: var(--tangerine-deep);
+}
+
+.ph-thermal.cold {
+  fill: var(--wave-soft);
+  stroke: var(--wave-deep);
+}
+
+.ph-thermal.even {
+  fill: var(--leaf-soft);
+  stroke: var(--leaf-deep);
+}
+
+.ph-gas {
+  fill: color-mix(in srgb, var(--grape) 10%, #fff);
+}
+
+.ph-particle {
+  fill: var(--grape);
+}
+
+.ph-streak {
+  stroke: var(--grape);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+
+.ph-cylinder {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ph-piston {
+  fill: var(--tin-deep);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+/* ------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-anim *,
+  .ph-act * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ----------------------------------------------------------- activities */
+
+.ph-act {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ph-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ph-chip {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 3px solid var(--w);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--w-deep);
+  color: var(--ink);
+  font: 800 1.1rem var(--font-play);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.ph-chip.on {
+  background: var(--w);
+  color: var(--w-on);
+}
+
+.ph-chip:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--w-deep);
+}
+
+.ph-chip:disabled {
+  cursor: default;
+}
+
+.ph-strength {
+  display: inline-block;
+  width: calc(6px + var(--s) * 30px);
+  height: 10px;
+  border-radius: 5px;
+  background: currentColor;
+  opacity: 0.75;
+}
+
+.ph-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.ph-go {
+  --b: var(--card);
+  --b-deep: var(--w-deep);
+  --b-on: var(--ink);
+  min-width: 170px;
+  min-height: 52px;
+  border: 3px solid var(--w);
+  font-size: 1.2rem;
+}
+
+.ph-slide {
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.ph-status {
+  margin: 0;
+  color: var(--ink);
+  font: 800 1.1rem var(--font-play);
+  text-align: center;
+}
+
+.ph-status.warn {
+  color: var(--berry-deep);
+}
+
+/* force arrows */
+
+.ph-snap-dot {
+  fill: var(--tin);
+}
+
+.ph-tip-handle {
+  cursor: grab;
+}
+
+/* sliders */
+
+.ph-sliders {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.ph-slider {
+  width: min(100%, 420px);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 4px 0 var(--line);
+}
+
+.ph-slider-name {
+  font: 800 1rem var(--font-play);
+}
+
+.ph-slider-value {
+  min-width: 5.5ch;
+  text-align: right;
+  font: 900 1.1rem var(--font-play);
+}
+
+.ph-slider input {
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  accent-color: var(--w-deep);
+  cursor: pointer;
+}
+
+.ph-fixed {
+  margin: 0;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+/* launch */
+
+.ph-cliff {
+  fill: color-mix(in srgb, var(--cocoa) 30%, #fff);
+  stroke: var(--cocoa-deep);
+  stroke-width: 3;
+}
+
+.ph-zone {
+  fill: var(--leaf);
+  opacity: 0.7;
+}
+
+.ph-traj {
+  fill: none;
+  stroke: var(--w-deep);
+  stroke-width: 3.5;
+  stroke-dasharray: 8 6;
+  stroke-linecap: round;
+}
+
+.ph-traj.hit {
+  stroke: var(--leaf-deep);
+}
+
+.ph-ball-land {
+  fill: var(--ink);
+}
+
+.ph-barrel {
+  fill: var(--night);
+  stroke: var(--night-deep);
+  stroke-width: 2.5;
+}
+
+.ph-wheel-big {
+  fill: var(--cocoa);
+  stroke: var(--cocoa-deep);
+  stroke-width: 3;
+}
+
+.ph-aim {
+  stroke: var(--ink-soft);
+  stroke-width: 3;
+  stroke-dasharray: 4 4;
+}
+
+/* balance */
+
+.ph-fulcrum {
+  fill: var(--tin-deep);
+}
+
+.ph-lever {
+  fill: var(--cocoa);
+  stroke: var(--cocoa-deep);
+  stroke-width: 2.5;
+}
+
+.ph-beam-g {
+  transform-box: view-box;
+  transition: transform 0.5s cubic-bezier(0.3, 1.3, 0.5, 1);
+}
+
+.ph-slot-tap {
+  cursor: pointer;
+  outline: none;
+}
+
+.ph-slot-zone {
+  fill: transparent;
+}
+
+.ph-slot-tap:focus-visible .ph-slot-zone {
+  fill: rgb(255 255 255 / 0.55);
+}
+
+@media (hover: hover) {
+  .ph-slot-tap:hover .ph-slot-zone {
+    fill: rgb(255 255 255 / 0.45);
+  }
+}
+
+.ph-slot-dot {
+  fill: #fff;
+}
+
+.ph-weight {
+  fill: var(--w);
+  stroke: var(--w-deep);
+  stroke-width: 2.5;
+}
+
+.ph-weight.fixed {
+  fill: var(--night);
+  stroke: var(--night-deep);
+}
+
+.ph-weight-text {
+  fill: #fff;
+  font: 900 15px var(--font-play);
+  pointer-events: none;
+}
+
+.ph-weight-tap {
+  cursor: pointer;
+}
+
+.ph-clear {
+  width: auto;
+  min-height: 48px;
+  font-size: 1.1rem;
+}
+
+/* waves */
+
+.ph-wave-bg {
+  fill: #fff;
+}
+
+.ph-wave-target {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 6;
+  stroke-dasharray: 10 8;
+  stroke-linecap: round;
+  opacity: 0.4;
+}
+
+.ph-wave.mine {
+  stroke: var(--w-deep);
+}
+
+.ph-wave.match {
+  stroke: var(--leaf-deep);
+}
+
+/* materials and magnets */
+
+.ph-slot-empty {
+  fill: none;
+  stroke: var(--tin-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 6;
+}
+
+.ph-magnet-hit {
+  fill: transparent;
+}
+
+.ph-tap-magnet {
+  cursor: pointer;
+  outline: none;
+}
+
+.ph-tap-magnet:hover .ph-magnet-hit,
+.ph-tap-magnet:focus-visible .ph-magnet-hit {
+  fill: rgb(255 255 255 / 0.6);
+}
+
+.ph-magnet-top {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ph-big-emoji {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.ph-stuck {
+  font-size: 34px;
+  letter-spacing: -6px;
+}
+
+.ph-pick-grid {
+  width: min(100%, 440px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+  gap: 8px;
+}
+
+.ph-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border: 3px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--line);
+  color: var(--ink);
+  font: 800 0.95rem var(--font-play);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.ph-pick.on {
+  border-color: var(--w-deep);
+  background: var(--w-soft);
+  box-shadow: 0 4px 0 var(--w-deep);
+}
+
+.ph-pick-emoji {
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-slide,
+  .ph-beam-g {
+    transition: none !important;
+  }
+}
