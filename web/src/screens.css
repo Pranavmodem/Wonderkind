@@ -190,6 +190,8 @@
 
 .band-worlds {
   display: grid;
+  /* minmax(0, …) so a long world name can't widen the column past a phone screen. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 40px;
 }
 
@@ -253,6 +255,8 @@
 .world-name h3 {
   margin: 0;
   font: 900 1.45rem/1.1 var(--font-play);
+  /* Last resort for a word too long for its card: break it rather than widen the map. */
+  overflow-wrap: anywhere;
 }
 
 .world-name p {
@@ -268,6 +272,27 @@
   gap: 4px;
   font: 800 1.05rem var(--font-play);
   white-space: nowrap;
+}
+
+/* Phones: the stars sit under the ages line, so a long one-word name (Electromagnetism) gets the card's width. */
+@media (max-width: 480px) {
+  .world-head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 4px 14px;
+  }
+
+  .world-symbol {
+    grid-row: span 2;
+  }
+
+  .world-stars {
+    margin-left: 0;
+  }
+
+  .world-name h3 {
+    font-size: min(1.45rem, 6.2vw);
+  }
 }
 
 .world-land {
